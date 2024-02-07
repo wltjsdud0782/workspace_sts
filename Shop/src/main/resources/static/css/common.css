@@ -1,0 +1,27 @@
+/* 모든 html에서 공통으로 적용되는 css */
+
+/* 폰트 */
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'Dovemayo_gothic';
+    font-size: 15pt;
+}
+
+/* 쇼핑몰 제목 크기 변경 */
+.main-title{
+    font-size: 40pt;
+}
+
+.pointer-span:hover{
+    cursor:pointer;
+}
+
+.header-div{
+    margin-bottom: 2rem;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>
+</title>
+    <style>
+        table {
+            width: 500px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: lightcyan;
+        }
+        tr,td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>아이디</td>
+            <td>[[${regMemberVO.id}]]</td>
+            <td>이름</td>
+            <td>[[${regMemberVO.name}]]</td>
+        </tr>
+        <tr>
+            <td>연락처</td>
+            <td>
+                <th:block th:each="e : ${regMemberVO.tel}">
+                [[${e}]]
+                </th:block></td>
+            <td>이메일</td>
+            <td>[[${regMemberVO.email}]]</td>
+        </tr>
+        <tr>
+            <td>생일</td>
+            <td colspan="3">
+                [[${regMemberVO.birth}]]
+            </td>
+        </tr>
+        <tr>
+            <td>관심레슨</td>
+            <td colspan="3">
+                <th:block th:each="e : ${regMemberVO.lesson}">
+                    [[${e}]]
+                </th:block>
+            </td>
+        </tr>
+        <tr>
+            <td>자기소개</td>
+            <td colspan="3">[[${regMemberVO.intro}]]</td>
+        </tr>
+
+
+    </table>
+</body>
+</html>

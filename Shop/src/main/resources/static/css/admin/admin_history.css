@@ -1,0 +1,15 @@
+.adminHistoryTable{
+    font-size: 13pt;
+}
+
+.tableRow{
+    margin-top: 5px;
+}
+
+.historyFormControl{
+    width: 150px;
+}
+
+.detail-modal{
+    font-size: 14pt;
+}

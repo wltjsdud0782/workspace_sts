@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <h3>update_board.html</h3>
+    <form action="/board/updateBoardSuccess" method="post">
+        <table>
+            <tr>
+                <td>글번호</td>
+                <td><input type="text" name="boardNum" th:value="${board.boardNum}" readonly></td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="title" th:value="${board.title}"></td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="writer" th:value="${board.writer}" readonly></td>
+            </tr>
+            <tr>
+                <td>작성일</td>
+                <td><input type="text" name="createDate" th:value="${board.createDate}" readonly></td>
+            </tr>
+            <tr>
+                <td>조회수</td>
+                <td><input type="text" name="readCnt" th:value="${board.readCnt}" readonly></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="content">[[${board.content}]]</textarea></td>
+            </tr>
+        </table>
+        <input type="submit" value="완료">
+    </form>
+</body>
+</html>

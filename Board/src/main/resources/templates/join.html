@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <h3>join.html</h3>
+    <form action="/member/joinSuccess" method="post">
+        아이디 <input type="text" name="memberId"> <br>
+        비밀번호 <input type="password" name="memberPw"> <br>
+        이름 <input type="text" name="memberName"> <br>
+        성별 <input type="radio" name="gender" value="남">남
+        <input type="radio" name="gender" value="여">여 <br>
+        이메일 <input type="text" name="memberEmail"> <br>
+        <input type="button" value="뒤로가기" onclick="goMain()">
+        <input type="submit" value="가입하기">
+    </form>
+    <script>
+        function goMain(){
+            location.href="/member/login"
+        }
+    </script>
+</body>
+</html>

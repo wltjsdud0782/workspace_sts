@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="boardMapper">
+    <resultMap id="board" type="com.green.Board.vo.BoardVO">
+        <result column="BOARD_NUM" property="boardNum"/>
+        <result column="TITLE" property="title"/>
+        <result column="CONTENT" property="content"/>
+        <result column="WRITER" property="writer"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="READ_CNT" property="readCnt"/>
+    </resultMap>
+
+    <select id="selectBoard" resultMap="board">
+        SELECT
+            BOARD_NUM
+            , TITLE
+            , WRITER
+            , CREATE_DATE
+            , READ_CNT
+        FROM BOARD
+        <if test='searchValue != null and !searchValue.equals("")'>
+        <!-- 결과값에 ''가 같이 나오지 않게 #이 아닌 $를 붙여 TITLE 혹은 WRITER 로 나오게 한다. -->
+            WHERE ${searchType}
+            LIKE CONCAT(
+            '%', #{searchValue}, '%'
+            )
+        </if>
+        <!--    최신순으로 정렬(내림차순)    -->
+        ORDER BY BOARD_NUM DESC
+        LIMIT ${displayDataCnt}
+        OFFSET ${displayDataCnt * (nowPage-1)}
+    </select>
+
+    <insert id="insertBoard">
+        INSERT INTO BOARD (
+            TITLE
+            , WRITER
+            , CONTENT
+        ) VALUES (
+            #{title}
+            , #{writer}
+            , #{content}
+        )
+    </insert>
+
+    <select id="selectBoardDetail" resultMap="board">
+        SELECT *
+        FROM BOARD
+        WHERE BOARD_NUM = #{boardNum}
+    </select>
+
+    <update id="updateBoard">
+        UPDATE BOARD
+        SET TITLE = #{title}
+            , CONTENT = #{content}
+        WHERE BOARD_NUM = #{boardNum}
+    </update>
+
+    <delete id="deleteBoard">
+        DELETE FROM BOARD
+        WHERE BOARD_NUM = #{boardNum}
+    </delete>
+
+    <update id="readCnt">
+        UPDATE BOARD
+        SET READ_CNT = READ_CNT + 1
+        WHERE BOARD_NUM = #{boardNum}
+    </update>
+
+    <select id="selectBoardCnt" resultType="int">
+        SELECT COUNT(BOARD_NUM)
+        FROM BOARD
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="memberMapper">
+    <resultMap id="member" type="com.green.Shop.member.vo.MemberVO">
+        <id     column="MEMBER_ID"      property="memberId"/>
+        <result column="MEMBER_NAME"    property="memberName"/>
+        <result column="MEMBER_ROLL"    property="memberRoll"/>
+    </resultMap>
+
+<!-- Ctrl + Shift + U : 대소문자변경   -->
+<!--  Alt + 클릭드래그 : 동시 여러줄 선택  -->
+<insert id="insertMember">
+    INSERT INTO SHOP_MEMBER (
+        MEMBER_ID
+        , MEMBER_PW
+        , MEMBER_NAME
+        , MEMBER_TEL
+        , MEMBER_EMAIL
+        , POST_CODE
+        , MEMBER_ADDR
+        , ADDR_DETAIL
+        , GENDER
+    ) VALUES (
+        #{memberId}
+        , #{memberPw}
+        , #{memberName}
+        , #{memberTel}
+        , #{memberEmail}
+        , #{postCode}
+        , #{memberAddr}
+        , #{addrDetail}
+        , #{gender}
+    );
+</insert>
+<select id="selectMember" resultMap="member">
+    SELECT
+    MEMBER_ID
+    , MEMBER_NAME
+    , MEMBER_ROLL
+    FROM SHOP_MEMBER
+    WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw}
+</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <h3>board_detail.html</h3>
+    <table>
+        <tr>
+            <td>글번호</td>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>작성일</td>
+            <td>조회수</td>
+        </tr>
+        <tr>
+            <td>[[${board.boardNum}]]</td>
+            <td>[[${board.title}]]</td>
+            <td>[[${board.writer}]]</td>
+            <td>[[${board.createDate}]]</td>
+            <td>[[${board.readCnt}]]</td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td colspan="4">[[${board.content}]]</td>
+        </tr>
+    </table>
+    <input type="button" value="뒤로가기" onclick="goBoardList()">
+    <!-- 자바 스크립트 뒤로가기 다른 방법 -->
+    <!-- <input type="button" value="뒤로가기" onclick="history.back(-1)"> 그 전 페이지 그대로 복원-->
+    <!-- <input type="button" value="뒤로가기" onclick="location.href='/board/boardList'"> 새로 다시 조회 -->
+
+
+    <th:block th:if="${session.loginInfo != null}">
+        <th:block th:if="${session.loginInfo.memberId.equals(board.writer)} or ${session.loginInfo.isAdmin.equals('Y')}">
+            <input type="button" value="수정" th:onclick="|location.href='@{/board/updateBoard(boardNum=${board.boardNum})}'|">
+            <input type="button" value="삭제" th:onclick="|location.href='@{/board/deleteBoard(boardNum=${board.boardNum})}'|">
+            <!-- <input type="button" value="삭제" th:onclick="goDelete([[${board.boardNum}]])"> -->
+        </th:block>
+    </th:block>
+
+    <h4>댓글</h4>
+    <th:block th:if="${session.loginInfo != null}">
+        <form action="/reply/insertReply" method="post">
+            <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+            <input type="text" name="content">
+            <input type="submit" value="등록">
+        </form>
+    </th:block>
+    <div th:each="reply : ${replyList}">
+        <div>[[${reply.writer}]]</div>
+        <div>[[${reply.createDate}]]</div>
+        <div>[[${reply.content}]]</div>
+        <th:block th:if="${session.loginInfo != null}">
+            <th:block th:if="${reply.writer == session.loginInfo.memberId}">
+                <form action="/reply/deleteReply" method="post">
+                    <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+                    <input type="hidden" name="replyNum" th:value="${reply.replyNum}">
+                    <input type="submit" value="삭제">
+                </form> 
+            </th:block>
+        </th:block>
+    </div>
+    
+
+    <script>
+        function goBoardList(){
+            location.href="/board/boardList";
+        }
+        // function goDelete(boardNum){
+        // location.href = '/board/deleteBoard?boardNum=' + boardNum; 
+        // location.href = `/board/deleteBoard?boardNum=${boardNum}`;
+        // 둘다 같다.
+        // }
+    </script>
+</body>
+</html>

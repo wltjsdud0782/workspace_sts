@@ -1,0 +1,46 @@
+.detailrow{
+    height: 300px;
+}
+
+.imgst{
+    border: none;
+}
+
+.iteminfo{
+    font-size: 16pt;
+    line-height: 45px;
+}
+
+.detailBtn{
+    background-color: rgb(25, 135, 84);
+    border: 2px solid rgb(226, 216, 71);
+    border-radius: 10px;
+    color: white;
+    width: 130px;
+    height:50px;
+}
+
+.intro{
+    text-align: center;
+    border: 2px solid rgb(25, 135, 84);
+    width: 80%;
+    margin: 30px auto;
+}
+
+.detailImg{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.cardimg{
+    height: 270px;
+    width: 200px;
+    margin-left: 150px;
+}
+
+.cntNum{
+    width: 100px;
+    height: 25px;
+    border-color: rgb(25, 135, 84);
+    box-shadow: none;
+}

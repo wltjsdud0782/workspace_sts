@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>글 수정 화면</title>
+<style>
+    .container {
+        width: 700px;
+        text-align: center;
+        margin: auto;
+    }
+    table {
+        border: 1px solid white;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+    tr, td {
+        border: 1px solid white;
+        background-color: rgb(196, 208, 235);
+    }
+    .insm{
+        margin-top: 30px;
+        color: white;
+        background-color: rgb(83, 131, 204);
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <form action="/updateList" method="post">
+            <table>
+                <tr>
+                    <td>글번호</td>
+                    <td>
+                        <input type="text" name="boardNum" th:value="${updateInfo.boardNum}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>제목</td>
+                    <td>
+                        <input type="text" name="boardTitle" th:value="${updateInfo.boardTitle}">
+                    </td>
+                </tr><tr>
+                    <td>작성자</td>
+                    <td>
+                        <input type="text" name="writer" th:value="${updateInfo.writer}" readonly>
+                    </td>
+                </tr><tr>
+                    <td>작성일</td>
+                    <td>
+                        <input type="text" name="createDate" th:value="${updateInfo.createDate}" readonly>
+                    </td>
+                </tr><tr>
+                    <td>내용</td>
+                    <td>
+                        <textarea cols="30" rows="10" name="boardContent">[[${updateInfo.boardContent}]]</textarea>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="수정" class="insm">
+        </form>
+    </div>
+</body>
+</html>

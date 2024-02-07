@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <h3>login_success.html</h3>
+    <tbody>
+        <!-- 로그인 실패 -->
+        <th:block th:if="${session.loginInfo == null}">
+            <script>
+                alert('ID 혹은 PW가 일치하지 않습니다.');
+                location.href = '/member/login';
+            </script>
+
+        </th:block>
+
+        <!-- 로그인 성공 -->
+        <th:block th:unless="${session.loginInfo == null}">
+            <script>
+                alert('[[${session.loginInfo.getMemberName}]]님 반갑습니다.');
+                location.href = '/board/boardList';
+            </script>
+        </th:block>
+    </tbody>
+</body>
+</html>

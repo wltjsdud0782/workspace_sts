@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/css/login.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="login-container">
+        <form action="/member/loginSuccess" method="post" class="login-form" id="login-form">
+        <div class="mb-3">
+            <label for="memberId" class="form-label">ID</label>
+            <input type="text" name="memberId" class="form-control" id="memberId" placeholder="아이디">
+          </div>
+          <div class="mb-3">
+            <label for="memberPw" class="form-label">PW</label>
+            <input type="password" name="memberPw" class="form-control" id="memberPw" placeholder="비밀번호">
+            <input type="submit" class="btn btn-outline-success" value="LOGIN">
+          </div>
+          <div>
+            <input type="button" class="btn btn-outline-success" value="비동기 LOGIN" onclick="login()">
+          </div>
+        </form>
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <script src="/js/content/member/login.js"></script>
+</th:block>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <h3>page1.html</h3>
+    [[${session.name}]] <br>
+    [[${session.age}]] <br>
+    
+    <!-- MemberVO 에서 ID만 출력 → .memberId 추가 -->
+    [[${session.member.memberId}]] <br>
+    <a href="/test/page2">page2로 이동</a>
+</body>
+</html>

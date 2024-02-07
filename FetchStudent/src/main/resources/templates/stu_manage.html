@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <link rel="stylesheet" href="/stu_manage.css">
+</head>
+<body>
+    <table class = "container">
+        <colgroup>
+            <col width="50%">
+            <col width="50%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <div>
+                            <!-- <select name="classCode" id="type"> 동기 -->
+                            <!-- 비동기 방법 ▼ -->
+                            <select name="classCode" id="class-selector" onchange="fetchSelect()">
+                                <option value="0">전체</option>
+                                <th:block th:each="class : ${classList}">
+                                <option th:value="${class.classCode}"
+                                th:selected="${stuVO.classCode} == ${class.classCode}"
+                                >[[${class.className}]]</option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div>
+                            <table id="stu-list-table">
+                                <colgroup>
+                                    <col width="10%">
+                                    <col width="30%">
+                                    <col width="10%">
+                                    <col width="*">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                    <td>No</td>
+                                    <td>반이름</td>
+                                    <td>학번</td>
+                                    <td>이름</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block>
+                                        <tr th:each="stu, state: ${stuList}">
+                                            <td>[[ ${#lists.size(stuList)} - ${state.index} ]]</td>
+                                            <td>[[${stu.className}]]</td>
+                                            <td>[[${stu.stuNum}]]</td>
+                                            <td>
+                                                <span th:onclick="selectScore([[${stu.stuNum}]])" id="name-span">
+                                                    [[${stu.stuName}]]
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </th:block> 
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="stu-detail-div">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="/stu_manage.js"></script>
+</body>
+</html>

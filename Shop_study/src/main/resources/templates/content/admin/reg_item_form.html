@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/admin_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+        <form action="/admin/regItem" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="" class="form-label">상품명</label>
+            <input type="text" name="itemName" class="form-control" id="" placeholder="상품명을 입력하세요.">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">가격</label>
+            <input type="text" name="itemPrice" class="form-control" id="" placeholder="가격을 입력하세요.">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">카테고리 설정</label><br>
+            <select class="form-select" aria-label="Default select example" name="cateCode">
+                <th:block th:each="cate : ${cateList}">
+                    <option th:value="${cate.cateCode}">
+                        [[${cate.cateName}]]
+                    </option>
+                </th:block>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">책 소개</span>
+            <textarea name="itemIntro" class="form-control" aria-label="With textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="mb-3">
+            <label for="" class="form-label">상품 이미지</label>
+            <input class="form-control" type="file" id="" name="itemMainImg" style="height: 150px;">
+            <input class="form-control" type="file" id="" name="itemInfoImgs" style="height: 150px;" multiple>
+        </div>
+    </div>
+
+        <div class="mb-3 d-md-flex justify-content-md-end">
+        <button type="submit" class="btn btn-outline-success">
+            상품 등록
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+              </svg>
+            </button>
+        </div>
+
+
+        </form>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- layout 객체 생성 밒 연결 -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <h3>layout.html</h3>
+
+    <div>
+        <!-- th:replace="~{}" : fragment 폴더 안 header.html로 영역 대체 -->
+        <!-- ::headerFragment : fragment 폴더 안 header.html안 headerFragment를 업로드. -->
+        <!-- !!!주의사항!!! : 불러오는 이름의 영역'만' 불러온다. 영역밖 내용은 해석X, 출력 X -->
+        <th:block th:replace="~{fragment/header::headerFragment}"></th:block>
+    </div>
+    <div>
+        <th:block th:replace="~{fragment/side::sideFragment}"></th:block>
+    </div>
+    <div>
+        <!-- 고정되어 있는건 th , 변경되는 건 layout 사용 -->
+        <th:block layout:fragment="contentFragment"></th:block>
+    </div>
+
+</body>
+</html>

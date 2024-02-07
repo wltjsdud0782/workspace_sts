@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>글 작성 화면</title>
+<style>
+    .container {
+        width: 700px;
+        text-align: center;
+        margin: auto;
+    }
+    table {
+        border: 1px solid white;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+    tr, td {
+        border: 1px solid white;
+        background-color: rgb(196, 208, 235);
+    }
+    .insm{
+        margin-top: 30px;
+        color: white;
+        background-color: rgb(83, 131, 204);
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <form action="insertNotice" method="post">
+            <table>
+                <tr>
+                    <td>글번호</td>
+                    <td><input type="text" name="boardNum"></td>
+                </tr>
+                <tr>
+                    <td>제목</td>
+                    <td><input type="text" name="boardTitle"></td>
+                </tr>
+                <tr>
+                    <td>작성자</td>
+                    <td><input type="text" name="writer"></td>
+                </tr>
+                <tr>
+                    <td>작성일</td>
+                    <td><input type="date" name="createDate"></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td><textarea name="boardContent" cols="30" rows="10"></textarea></td>
+                </tr>
+            </table>
+            <input type="submit" value="글등록" class="insm">
+        </form>
+    </div>
+
+</body>
+</html>

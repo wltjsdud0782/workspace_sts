@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <th:block layout:fragment="content_css">
+        
+        <!-- css 연결 -->
+        <link rel="stylesheet" href="/css/menu.css">
+        
+    </th:block>
+
+    <th:block th:fragment="menuFragment">
+        <!-- list 로 데이터를 받아도 list외의 함께 열리는 파일들도 전달받은 데이터 사용 가능 -->
+        <h3 class="test">menu.html [[${name}]]</h3>
+
+    </th:block>
+</html>

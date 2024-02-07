@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="cartMapper">
+    <resultMap id="cartView" type="com.green.Shop.cart.vo.CartViewVO">
+        <result column="CART_CODE"          property="cartCode"/>
+        <result column="ITEM_CODE"          property="itemCode"/>
+        <result column="MEMBER_ID"          property="memberId"/>
+        <result column="CART_CNT"           property="cartCnt"/>
+        <result column="CART_DATE"          property="cartDate"/>
+        <result column="ITEM_NAME"          property="itemName"/>
+        <result column="ITEM_PRICE"         property="itemPrice"/>
+        <result column="ITEM_INTRO"         property="itemIntro"/>
+        <result column="TOTAL_PRICE"        property="totalPrice"/>
+        <result column="MEMBER_NAME"        property="memberName"/>
+        <result column="MEMBER_TEL"         property="memberTel"/>
+        <result column="ADDRESS"            property="address"/>
+        <result column="ATTACHED_FILE_NAME" property="attachedFileName"/>
+        <result column="ORIGIN_FILE_NAME"   property="originFileName"/>
+        <result column="IS_MAIN"            property="isMain"/>
+        <result column="IMG_CODE"           property="imgCode"/>
+        <result column="CATE_CODE"          property="cateCode"/>
+        <result column="CATE_NAME"          property="cateName"/>
+    </resultMap>
+
+
+<!-- Ctrl + Shift + U : 대소문자변경   -->
+<!--  Alt + 클릭드래그 : 동시 여러줄 선택  -->
+    <insert id="insertCart">
+
+        INSERT INTO SHOP_CART (
+            ITEM_CODE
+            , MEMBER_ID
+            , CART_CNT
+        ) VALUES (
+            #{itemCode}
+            , #{memberId}
+            , #{cartCnt}
+        )
+    </insert>
+
+    <select id="selectCart" resultMap="cartView">
+        SELECT
+        *
+        FROM CART_VIEW
+        WHERE MEMBER_ID = #{memberId}
+        ORDER BY CART_DATE DESC
+    </select>
+
+    <select id="findCartItem" resultMap="cartView">
+        SELECT
+        *
+        FROM SHOP_CART
+        WHERE ITEM_CODE = #{itemCode}
+        AND MEMBER_ID = #{memberId}
+    </select>
+
+    <update id="updateCartItem">
+        UPDATE SHOP_CART
+        SET
+        CART_CNT = CART_CNT + ${cartCnt}
+        WHERE ITEM_CODE = #{itemCode}
+        AND MEMBER_ID = #{memberId}
+    </update>
+
+    <delete id="deleteCartItem">
+        DELETE FROM SHOP_CART
+        WHERE CART_CODE = #{cartCode}
+    </delete>
+
+    <update id="updateCartCnt">
+        UPDATE SHOP_CART
+        SET
+        CART_CNT = #{cartCnt}
+        WHERE CART_CODE = #{cartCode}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

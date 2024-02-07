@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!-- 주석처리한 태그는 실질적으로 필요없는 부분이다. 지워도 상관없음. 
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body> -->
+    <!-- th:fragment="" : ""안의 이름으로 이 안의 내용을 저장하는 영역을 지정 -->
+    <th:block th:fragment="headerFragment">
+        <h3>header.html</h3>
+    </th:block>
+    <!-- 영역밖이기 때문에 출력X -->
+    12345
+
+<!-- </body> -->
+</html>

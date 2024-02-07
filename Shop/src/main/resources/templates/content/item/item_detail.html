@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/css/item/item_detail.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="container">
+        <form action="/buy/insertBuyOne" method="post" id="buyOne">
+        <div class="main">
+            <div class="row detailrow">
+                <div class="card col-5 imgst" th:each="img : ${itemInfo.imgList}" th:if="${img.isMain eq 'Y'}">
+                    <img th:src="@{'/upload/'+${img.attachedFileName}}" class="card-img-top cardimg" alt="...">
+                </div>
+                <div class="col-7 iteminfo">
+                    <input type="hidden" name="itemCode" th:value="${itemInfo.itemCode}">
+                    <div style="margin-top: 10px;">[[${itemInfo.itemName}]]</div>
+                    <div>[[${#numbers.formatCurrency(itemInfo.itemPrice)}]]</div>
+                    <input type="hidden" name="buyPrice" th:value="${itemInfo.itemPrice}">
+                    <div>수 량 
+                            <input type="number" name="buyCnt" class="cntNum" min="1" th:max="${itemInfo.itemStock}" th:oninput="setPrice(this, [[${itemInfo.itemPrice}]])" value="1">
+                    </div>
+                    <div>총 구매가격 >> <span class="result">[[${#numbers.formatCurrency(itemInfo.itemPrice)}]]</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <input type="button" class="detailBtn" th:onclick="insertCart([[${session.loginInfo}]], [[${itemInfo.itemCode}]])" value="장바구니"> &nbsp; 
+                        <input type="button" class="detailBtn" onclick="goBuyOne()" value="바로 구매">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro">
+            [[${itemInfo.itemIntro}]]
+        </div>
+
+        <th:block th:each="img : ${itemInfo.imgList}">
+            <div class="detailImg" th:if="${img.isMain eq 'N'}">
+                <img th:src="@{'/upload/'+${img.attachedFileName}}" class="card-img-top" alt="...">
+            </div>
+        </th:block>
+    </form>
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <script src="/js/content/item/item_detail.js"></script>
+</th:block>
+</html>

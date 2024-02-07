@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="stuMapper">
+    <resultMap id="stu" type="com.green.FetchStudent.vo.StuVO">
+        <result column="STU_NUM"    property="stuNum"/>
+        <result column="STU_NAME"   property="stuName"/>
+        <result column="CLASS_CODE" property="classCode"/>
+        <result column="CLASS_NAME" property="className"/>
+    </resultMap>
+
+    <resultMap id="class" type="com.green.FetchStudent.vo.ClassVO">
+        <id     column="CLASS_CODE" property="classCode"/>
+        <result column="CLASS_NAME" property="className"/>
+    </resultMap>
+
+    <resultMap id="score" type="com.green.FetchStudent.vo.ScoreVO">
+        <id     column="STU_NUM"    property="stuNum"/>
+        <result column="SCORE_NUM"  property="scoreNum"/>
+        <result column="KOR_SCORE"  property="korScore"/>
+        <result column="ENG_SCORE"  property="engScore"/>
+        <result column="MATH_SCORE" property="mathScore"/>
+        <result column="CLASS_NAME" property="className"/>
+        <result column="STU_NAME"   property="stuName"/>
+    </resultMap>
+
+    <select id="selectStu" resultMap="stu">
+        SELECT
+            STU_NUM
+            , STU_NAME
+            , CLASS_NAME
+        FROM STUDENT_INFO S INNER JOIN CLASS_INFO C
+        ON S.CLASS_CODE = C.CLASS_CODE
+
+        <if test='classCode != 0'>
+            WHERE S.CLASS_CODE = #{classCode}
+        </if>
+        ORDER BY S.CLASS_CODE, STU_NUM
+
+    </select>
+
+    <select id="selectClassList" resultMap="class">
+        SELECT
+            CLASS_NAME
+            , CLASS_CODE
+        FROM CLASS_INFO
+        ORDER BY CLASS_CODE ASC
+    </select>
+
+    <select id="selectScore" resultMap="score">
+        SELECT
+        S.STU_NUM
+        , CLASS_NAME
+        , STU_NAME
+        , KOR_SCORE
+        , ENG_SCORE
+        , MATH_SCORE
+        FROM STU_SCORE SS
+        RIGHT OUTER JOIN STUDENT_INFO S
+        ON SS.STU_NUM = S.STU_NUM
+        INNER JOIN CLASS_INFO C
+        ON S.CLASS_CODE = C.CLASS_CODE
+        WHERE S.STU_NUM = #{stuNum}
+    </select>
+
+    <insert id="insertScore">
+        INSERT INTO STU_SCORE(
+            KOR_SCORE
+            , ENG_SCORE
+            , MATH_SCORE
+            , STU_NUM
+        ) VALUES (
+            #{korScore}
+            , #{engScore}
+            , #{mathScore}
+            , #{stuNum}
+        )
+    </insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

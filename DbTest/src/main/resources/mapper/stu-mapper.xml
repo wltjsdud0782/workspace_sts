@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- 모든 쿼리에는 세미콜론(;)을 붙이지 않는다. -->
+<!-- 자바 파일에서는 자동 커밋 -->
+<mapper namespace="stuMapper">
+    <!--  STUDENT 테이블과 StudentVO를 연결하는 resultMap  -->
+            <!--  type : 연결할 VO 의 풀위치  -->
+    <resultMap id="stu" type="com.green.DbTest.vo.StudentVO">
+    <!--    column="db의 컬럼명"    property="VO클래스 안 변수명"    -->
+        <result column="STU_NO"     property="stuNo" />
+        <result column="STU_NAME"   property="stuName" />
+        <result column="SCORE"      property="score" />
+        <result column="ADDR"       property="addr" />
+    </resultMap>
+
+    <insert id="insertStudent">
+        INSERT INTO STUDENT (
+            STU_NO
+            , STU_NAME
+            , SCORE
+            , ADDR
+        ) VALUES (
+            11
+            , '이순신'
+            , 95
+            , '부산'
+        )
+    </insert>
+
+    <delete id="deleteStudent">
+        DELETE FROM STUDENT
+        WHERE STU_NO = 11
+    </delete>
+
+    <delete id="delete">
+        DELETE FROM STUDENT
+        WHERE STU_NO = #{stuNo}
+    </delete>
+
+    <!--  select 는 resultType 이 따라온다. resultType : 조회된 자료를 받아올 자료형 (자바에서 기본으로 제공하는 자료형)  -->
+    <!--  resultMap : 개발자가 직접 만든 자료형 [ex)class]  -->
+    <select id="selectName" resultType="String">
+        SELECT STU_NAME FROM STUDENT
+        WHERE STU_NO = 1
+    </select>
+
+    <select id="selectScore" resultType="int">
+        SELECT SCORE FROM STUDENT
+        WHERE STU_NO = 1
+    </select>
+
+    <select id="selectStu" resultMap="stu">
+        SELECT STU_NO
+            , STU_NAME
+            , SCORE
+            , ADDR FROM STUDENT
+        WHERE STU_NO = 1
+    </select>
+
+    <select id="selectStuList" resultMap="stu">
+        SELECT STU_NO
+        , STU_NAME
+        , SCORE
+        , ADDR FROM STUDENT
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .all {
+        text-align: center;
+    }
+    table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+</head>
+<body>
+    <div class = all>
+        <h2>이력서 확인</h2>
+        <table>
+            <tr>
+                <td>이름</td>
+                <td>[[${name}]]</td>
+                <td>연락처</td>
+                <td>[[${tel}]]</td>
+            </tr>
+            <tr>
+                <td>학력</td>
+                <td>[[${grade}]] [[${schoolName}]]</td>
+                <td>지원구분</td>
+                <td>[[${type}]]</td>
+            </tr>
+        </table> <br>
+        <div></div>
+        <table>
+            <tr>
+                <td>자격증 정보</td>
+                <td colspan="3">[[${certiAll}]]</td>
+            </tr>
+            <tr>
+                <td>경력 정보</td>
+                <td colspan="3">[[${careerAll}]]</td>
+            </tr>
+        </table> <br>
+        <div></div>
+        <table>
+            <tr>
+                <td colspan="4">자기소개</td>
+            </tr>
+            <tr>
+                <td colspan="4">[[${intro}]]</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .all {
+        text-align: center;
+    }
+    table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+</head>
+<body>
+    <div class = all>
+        <h2>이력서 정보</h2>
+        <form action="go_resume_3" method="post">
+            <input type="hidden" name="name" th:value="${name}">
+            <input type="hidden" name="tel" th:value="${tel}">
+            <h4>학력</h4>
+            <select name="grade">
+                <option>대졸</option>
+                <option>대학졸업예정</option>
+                <option>전문대졸</option>
+                <option>고졸</option>
+            </select>
+            <input type="text" placeholder="학교명" name="schoolName"> <br>
+            <span>지원 구분</span>
+            <input type="radio" name="type" value="신입" checked>신입
+            <input type="radio" name="type" value="경력">경력 <br>
+            <h4>자격정보</h4>
+            <table>
+                <tr>
+                    <td>자격증명</td>
+                    <td>취득일자</td>
+                    <td>발행기관</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="certiName"></td>
+                    <td><input type="date" name="certiDate"></td>
+                    <td><input type="text" name="certiAt"></td>
+                </tr>
+            </table> <br>
+            <h4>경력정보</h4>
+            <table>
+                <tr>
+                    <td>회사명</td>
+                    <td>담당업무</td>
+                    <td>경력기간</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="careerName"></td>
+                    <td><input type="text" name="careerJob"></td>
+                    <td><input type="text" name="careerDate1">년<input type="text" name="careerDate2">개월</td>
+                </tr>
+            </table> <br>
+            <h4>자기소개</h4>
+            <textarea cols="30" rows="5" name="intro"></textarea><br>
+            <input type="submit" value="등록">
+        </form>
+    </div>
+</body>
+</html>

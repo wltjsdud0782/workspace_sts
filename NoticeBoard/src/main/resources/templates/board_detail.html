@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>글 상세 조회 화면</title>
+<style>
+    .container {
+        width: 700px;
+        text-align: center;
+        margin: auto;
+    }
+    table {
+        border: 1px solid white;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+    tr, td {
+        border: 1px solid white;
+        background-color: rgb(196, 208, 235);
+    }
+    .inbt{
+        margin-top: 30px;
+        color: white;
+        background-color: rgb(83, 131, 204);
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <tr>
+                <td>글 번호</td>
+                <td>[[${boardInfo.boardNum}]]</td>
+                <td>작성자</td>
+                <td>[[${boardInfo.writer}]]</td>
+                <td>작성일</td>
+                <td>[[${boardInfo.createDate}]]</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td colspan="5">[[${boardInfo.boardTitle}]]</td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td colspan="5">[[${boardInfo.boardContent}]]</td>
+            </tr>
+        </table>
+        <input type="button" value="뒤로가기" 
+        class="inbt" th:onclick="|location.href='@{/(readCnt=${boardInfo.readCnt})}'|">
+        <input type="button" value="수정"
+        class="inbt" th:onclick="|location.href='@{updateNotice(boardNum=${boardInfo.boardNum})}'|">
+        <input type="button" value="삭제"
+        class="inbt" th:onclick="|location.href='@{deleteNotice(boardNum=${boardInfo.boardNum})}'|">
+    </div>
+</body>
+</html>
