@@ -29,6 +29,8 @@ function showBuyDetail(buyCode){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
+        document.querySelector('.modal-body').innerHTML = '';
+
         let str = '';
 
         str +=
@@ -36,7 +38,7 @@ function showBuyDetail(buyCode){
         <div class="modal-body">
                         <div class="row mt-3">
                             <div class="col">
-                                <table class="table text-center align-middle">
+                                <table class="table text-center align-middle" style="font-size: 13pt;">
                                     <colgroup>
                                         <col width="20%">
                                         <col width="30%">
@@ -63,10 +65,10 @@ function showBuyDetail(buyCode){
                             <div class="col">
                                 <table class="table table-hover text-center align-middle table-bordered">
                                     <colgroup>
-                                        <col width="15%">
-                                        <col width="40%">
-                                        <col width="15%">
-                                        <col width="30%">
+                                        <col width="10%">
+                                        <col width="60%">
+                                        <col width="10%">
+                                        <col width="20%">
                                     </colgroup>
                                     <thead>
                                         <tr class="table-success">
@@ -76,22 +78,41 @@ function showBuyDetail(buyCode){
                                             <td>결제 금액</td>
                                         </tr>
                                     </thead>
-                                    <tbody each="buyDetail: ${data.buyDetailList}">
-                                        <tr>
-                                            <td>a</td>
-                                            <td>${buyDetail.itemVO.itemName}</td>
-                                            <td>${buyDetail.buyCnt}</td>
-                                            <td>${buyDetail.totalPrice}</td>
-                                        </tr>
+                                    <tbody>
+        `
+        let str2 = '';
+        data.buyDetailList.forEach(function(buyDetail , index){
+            str2 +=
+            `
+                <tr>
+                    <td>${data.buyDetailList.length - index}</td>
+                    <td>
+                        <div class="row align-items-center">
+                            <div class="col-3">
+                                <img src="/upload/${buyDetail.itemVO.imgList[0].attachedFileName}" style="width:100%; height:100%;">
+                            </div>
+                            <div class="col-9 text-start">
+                                ${buyDetail.itemVO.itemName}
+                            </div>
+                        </div>
+                    </td>
+                    <td>${buyDetail.buyCnt}</td>
+                    <td>${buyDetail.totalPrice}</td>
+                </tr>
+        `
+        });
+      
+         //   }
+        let str3 = '';
+        str3 =
+        `
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
         `
-        document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str);
-         
-
+        document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str + str2 + str3);
 
         modal_open.show();
     })
