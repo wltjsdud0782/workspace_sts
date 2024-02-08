@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/admin_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col">
+                        <h5>상품 목록</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="text-end" style="font-size: 11pt;">
+                        * 총 <span>50</span>개의 상품이 등록되어 있습니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="50%">
+                                <col width="10%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                                <tr class="table-success">
+                                    <td>No</td>
+                                    <td>상품코드</td>
+                                    <td>상품명</td>
+                                    <td>재고</td>
+                                    <td>상태</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="pointer-span" th:each="item, state : ${itemList}" th:onclick="itemDetailInfo([[${item.itemCode}]])">
+                                    <td>[[${state.index + 1}]]</td>
+                                    <td>[[${item.itemCode}]]</td>
+                                    <td>[[${item.itemName}]]</td>
+                                    <td>[[${item.itemStock}]]</td>
+                                    <td>S</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 updateItemDetail">
+                <!-- 자바스크립트로 채울곳 -->
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <script src="/js/content/admin/update_item.js"></script>
+</th:block>
+</html>

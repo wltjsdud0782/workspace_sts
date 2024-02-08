@@ -25,7 +25,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col">
-                                        <select name="searchType" class="form-select" aria-label="Default select example">
+                                        <select name="searchType" class="form-select">
                                             <option value="BUY_CODE" th:selected = "${searchVO.searchType == 'BUY_CODE'}">구매번호</option>
                                             <option value="MEMBER_ID" th:selected = "${searchVO.searchType == 'MEMBER_ID'}">구매자ID</option>
                                         </select>
@@ -92,7 +92,7 @@
                         <col width="30%">
                     </colgroup>
                     <thead>
-                        <tr>
+                        <tr class="table-success">
                             <td>No</td>
                             <td>구매번호</td>
                             <td>구매자ID</td>

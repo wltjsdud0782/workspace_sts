@@ -7,7 +7,7 @@
             <li class="list-group-item pointer-span" th:classappend="${page == 'buyHistory' ? 'list-group-item-action list-group-item-success' : ''}" onclick="location.href='/admin/buyHistory'">구매내역 조회</li>
             <li class="list-group-item pointer-span" th:classappend="${page == 'itemManage' ? 'list-group-item-action list-group-item-success' : ''}" onclick="location.href='/admin/regItemForm'">상품 등록</li>
             <li class="list-group-item pointer-span" th:classappend="${page == '#' ? 'list-group-item-action list-group-item-success' : ''}" onclick="location.href='/admin/#'">상품 상태 변경</li>
-            <li class="list-group-item pointer-span" th:classappend="${page == '#' ? 'list-group-item-action list-group-item-success' : ''}" onclick="location.href='/admin/#'">상품 정보 변경</li>
+            <li class="list-group-item pointer-span" th:classappend="${page == 'updateItem' ? 'list-group-item-action list-group-item-success' : ''}" onclick="location.href='/admin/updateItem'">상품 정보 변경</li>
             <li class="list-group-item pointer-span" th:classappend="${page == '#' ? 'list-group-item-action list-group-item-success' : ''}" onclick="location.href='/admin/#'">상품 검색</li>
           </ul>
 

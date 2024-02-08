@@ -88,4 +88,23 @@ public class AdminController {
         return "redirect:/admin/regItemForm";
     }
 
+    @GetMapping("/updateItem")
+    public String updateItem(Model model, @RequestParam(name = "page", required = false, defaultValue = "updateItem")String page){
+        model.addAttribute("page", page);
+
+        model.addAttribute("itemList", itemService.selectItem());
+        return "content/admin/update_item";
+    }
+
+    @ResponseBody
+    @PostMapping("itemDetailInfo")
+    public ItemVO itemDetailInfo(@RequestParam(name = "itemCode")int itemCode){ // 상품 상세 정보
+        return itemService.selectDetail(itemCode);
+    }
+
+
+
+
+
+
 }
