@@ -43,7 +43,7 @@ function itemDetailInfo(itemCode){
                                 <td class="text-start">카테고리</td>
                                 <td>
                                     <select class="form-select">
-                                        <option value="">1</option>
+                                        <option value=""></option>
                                     </select>
                                 </td>
                             </tr>
