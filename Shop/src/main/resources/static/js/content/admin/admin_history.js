@@ -102,7 +102,6 @@ function showBuyDetail(buyCode){
         `
         });
       
-         //   }
         let str3 = '';
         str3 =
         `
