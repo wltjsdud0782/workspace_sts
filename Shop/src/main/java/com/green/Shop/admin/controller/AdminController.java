@@ -1,6 +1,7 @@
 package com.green.Shop.admin.controller;
 
 import com.green.Shop.admin.service.AdminServiceImpl;
+import com.green.Shop.admin.vo.SearchVO;
 import com.green.Shop.buy.service.BuyServiceImpl;
 import com.green.Shop.buy.vo.ShopBuyVO;
 import com.green.Shop.item.service.ItemServiceImpl;
@@ -31,11 +32,11 @@ public class AdminController {
     private AdminServiceImpl adminService;
 
     //관리자의 구매 이력 페이지 이동
-    @GetMapping("/buyHistory")
-    public String buyHistory(@RequestParam(name = "page", required = false, defaultValue = "buyHistory")String page , Model model){
+    @RequestMapping("/buyHistory")
+    public String buyHistory(@RequestParam(name = "page", required = false, defaultValue = "buyHistory")String page, SearchVO searchVO, Model model){
         model.addAttribute("page", page);
         // 구매 목록 조회
-        List<ShopBuyVO> buyList = adminService.selectAdminBuyList();
+        List<ShopBuyVO> buyList = adminService.selectAdminBuyList(searchVO);
         model.addAttribute("buyList", buyList);
         return "content/admin/admin_history";
     }

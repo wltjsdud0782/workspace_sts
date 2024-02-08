@@ -1,5 +1,6 @@
 package com.green.Shop.admin.service;
 
+import com.green.Shop.admin.vo.SearchVO;
 import com.green.Shop.buy.vo.ShopBuyVO;
 import com.green.Shop.item.vo.ItemVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,8 +30,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public List<ShopBuyVO> selectAdminBuyList() { // 관리자메뉴 구매이력관리
-        return sqlSession.selectList("adminMapper.selectAdminBuyList");
+    public List<ShopBuyVO> selectAdminBuyList(SearchVO searchVO) { // 관리자메뉴 구매이력관리
+        return sqlSession.selectList("adminMapper.selectAdminBuyList", searchVO);
     }
 
     @Override

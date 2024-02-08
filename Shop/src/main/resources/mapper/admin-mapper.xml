@@ -48,6 +48,10 @@
         SELECT
         *
         FROM SHOP_BUY
+        <!--    검색    -->
+        <if test='searchValue != null and !searchValue.equals("")'>
+            WHERE ${searchType} LIKE CONCAT ( '%', #{searchValue}, '%')
+        </if>
         ORDER BY BUY_DATE DESC;
     </select>
 

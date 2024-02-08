@@ -1,5 +1,6 @@
 package com.green.Shop.admin.service;
 
+import com.green.Shop.admin.vo.SearchVO;
 import com.green.Shop.buy.vo.ShopBuyVO;
 import com.green.Shop.item.vo.ImgVO;
 import com.green.Shop.item.vo.ItemVO;
@@ -12,7 +13,7 @@ public interface AdminService {
 
     void insertItem(ItemVO itemVO); // 상품 등록 + 상품 이미지 등록
 
-    List<ShopBuyVO> selectAdminBuyList(); // 관리자메뉴 구매이력관리
+    List<ShopBuyVO> selectAdminBuyList(SearchVO searchVO); // 관리자메뉴 구매이력관리
 
     ShopBuyVO selectAdminBuyDetailList(ShopBuyVO shopBuyVO); // 관리자메뉴 구매상세내역조회
 }

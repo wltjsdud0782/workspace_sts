@@ -85,7 +85,7 @@ function showBuyDetail(buyCode){
             str2 +=
             `
                 <tr>
-                    <td>${data.buyDetailList.length - index}</td>
+                    <td>${index + 1}</td>
                     <td>
                         <div class="row align-items-center">
                             <div class="col-3">

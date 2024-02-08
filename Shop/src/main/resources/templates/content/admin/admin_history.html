@@ -13,69 +13,71 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <table class="table table-borderless text-center align-middle adminHistoryTable">
-                    <colgroup>
-                        <col width="20%">
-                        <col width="32%">
-                        <col width="32%">
-                        <col width="16%">
-                    </colgroup>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="BUY_CODE">구매번호</option>
-                                        <option value="MEMBER_NAME">구매자명</option>
-                                      </select>
-                                </div>
-                            </div>
-                        </td>
-                        <td colspan="3">
-                            <div class="row">
-                                <div class="col">
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col">
-                                    구 매 일 시
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-group">
-                                        <span class="input-group-text">From</span>
-                                        <input type="date" class="form-control">
+                <form action="/admin/buyHistory" method="post">
+                    <table class="table table-borderless text-center align-middle adminHistoryTable">
+                        <colgroup>
+                            <col width="20%">
+                            <col width="32%">
+                            <col width="32%">
+                            <col width="16%">
+                        </colgroup>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <select name="searchType" class="form-select" aria-label="Default select example">
+                                            <option value="BUY_CODE" th:selected = "${searchVO.searchType == 'BUY_CODE'}">구매번호</option>
+                                            <option value="MEMBER_ID" th:selected = "${searchVO.searchType == 'MEMBER_ID'}">구매자ID</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-group">
-                                        <span class="input-group-text">To</span>
-                                        <input type="date" class="form-control">
+                            </td>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" name="searchValue" th:value="${searchVO.searchValue}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="row">
-                                <div class="col d-grid">
-                                    <input type="button" class="btn btn-success" value="검색">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        구 매 일 시
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text">From</span>
+                                            <input type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text">To</span>
+                                            <input type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col d-grid">
+                                        <input type="submit" class="btn btn-success" value="검색">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
         </div>
 
@@ -101,7 +103,7 @@
                     <tbody>
                         <tr class="pointer-span" th:each="buy, state : ${buyList}" th:onclick="showBuyDetail([[${buy.buyCode}]])">
                             <td>
-                                [[${#numbers.formatInteger(#lists.size(buyList) - state.index, 2)}]]
+                                [[${#numbers.formatInteger(state.index + 1, 2)}]]
                             </td>
                             <td>[[${buy.buyCode}]]</td>
                             <td>[[${buy.memberId}]]</td>
@@ -122,59 +124,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                     <div class="modal-body">
-                    <!-- <div class="row mt-3">
-                            <div class="col">
-                                <table class="table text-center align-middle">
-                                    <colgroup>
-                                        <col width="20%">
-                                        <col width="30%">
-                                        <col width="20%">
-                                        <col width="30%">
-                                    </colgroup>
-                                    <tr>
-                                        <td>구매번호</td>
-                                        <td>A</td>
-                                        <td>구매자ID</td>
-                                        <td>B</td>
-                                    </tr>
-                                    <tr>
-                                        <td>구매금액</td>
-                                        <td>C</td>
-                                        <td>구매일시</td>
-                                        <td>D</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col">
-                                <table class="table table-hover text-center align-middle table-bordered">
-                                    <colgroup>
-                                        <col width="15%">
-                                        <col width="40%">
-                                        <col width="15%">
-                                        <col width="30%">
-                                    </colgroup>
-                                    <thead>
-                                        <tr class="table-success">
-                                            <td>No</td>
-                                            <td>구매 상품</td>
-                                            <td>수량</td>
-                                            <td>결제 금액</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>a</td>
-                                            <td>b</td>
-                                            <td>c</td>
-                                            <td>d</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> -->
+                        <!-- 자바스크립트로 내용 채우기 -->
                     </div>
                 </div>
             </div>
