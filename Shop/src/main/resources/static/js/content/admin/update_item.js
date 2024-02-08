@@ -104,6 +104,12 @@ function itemDetailInfo(itemCode){
                         </table>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-3">
+                        <input type="button" value="변경">
+                    </div>
+                </div>
         `
         
 
