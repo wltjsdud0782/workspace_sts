@@ -29,38 +29,38 @@ function itemDetailInfo(itemCode){
         str = `
         <div class="row">
                     <div class="col">
-                        <h5>상품 기본 정보</h5>
+                        <h3>상품 기본 정보</h3>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <table class="table table-borderless text-center align-middle" style="font-size: 12pt;">
                             <colgroup>
-                                <col width="15%">
-                                <col width="40%">
-                                <col width="15%">
                                 <col width="30%">
+                                <col width="70%">
                             </colgroup>
                             <tr>
-                                <td>카테고리</td>
+                                <td class="text-start">카테고리</td>
                                 <td>
                                     <select class="form-select">
                                         <option value="">1</option>
                                     </select>
                                 </td>
-                                <td>상품수량</td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">상품명</td>
                                 <td>
-                                    <input type="text" class="form-control" value="${data.itemStock}">
+                                    <input type="text" class="form-control" value="${data.itemName}">
                                 </td>
                             </tr>
                             <tr>
-                                <td>상품명</td>
-                                <td colspan="4">
-                                    <input type="text" class="form-control" style="width: 100%;" value="${data.itemName}">
+                                <td class="text-start">상품수량</td>
+                                <td>
+                                    <input type="text" class="form-control" style="width: 100%;" value="${data.itemStock}">
                                 </td>
                             </tr>
                             <tr>
-                                <td>상품상태</td>
+                                <td class="text-start">상품상태</td>
                                 <td colspan="4" class="text-start">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="inlineRadio1" value="">
@@ -82,24 +82,24 @@ function itemDetailInfo(itemCode){
 
                 <div class="row mt-4">
                     <div class="col">
-                        <h5>상품 이미지 정보</h5>
+                        <h3>상품 이미지 정보</h3>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <table class="table table-borderless text-center align-middle" style="font-size: 12pt;">
+                        <table class="table table-borderless text-start align-middle" style="font-size: 12pt;">
                             <colgroup>
-                                <col width="20%">
                                 <col width="30%">
-                                <col width="20%">
-                                <col width="30%">
+                                <col width="70%">
                             </colgroup>
                             <tr>
                                 <td>메인 이미지</td>
                                 <td>a</td>
+                            </tr>
+                            <tr>
                                 <td>상세 이미지</td>
-                                <td>b 이미지</td>
+                                <td>b</td>
                             </tr>
                         </table>
                     </div>
