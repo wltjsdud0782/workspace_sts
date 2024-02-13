@@ -101,6 +101,7 @@ public class AdminController {
     @ResponseBody
     @PostMapping("/itemDetailInfo")
     public ItemVO itemDetailInfo(@RequestParam(name = "itemCode")int itemCode){ // 상품 상세 정보
+                itemService.selectCate();
         return itemService.selectDetail(itemCode);
     }
 

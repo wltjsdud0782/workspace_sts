@@ -45,9 +45,9 @@ function itemDetailInfo(itemCode){
                                 <td class="text-start">카테고리</td>
                                 <td>
                                     <select name="cateCode" class="form-select">
-                                        <option ${data.cateCode == 1 ? 'selected' : ''} value="1">IT/인터넷</option>
-                                        <option ${data.cateCode == 2 ? 'selected' : ''} value="2">소설/에세이</option>
-                                        <option ${data.cateCode == 3 ? 'selected' : ''} value="3">문화/여행</option>
+                                        <option value="${data.cateCode}">${data.categoryVO.cateName}</option>
+                                        <option value="${data.cateCode}">${data.categoryVO.cateName}</option>
+                                        <option value="${data.cateCode}">${data.categoryVO.cateName}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -143,7 +143,10 @@ str += `
     });
 }
 
-const modal_open = new bootstrap.Modal('#item-img');
+
+
+
+const img_modal_open = new bootstrap.Modal('#item-img');
 function showImg(imgCode){
     fetch('/admin/selectImg', { //요청경로
         method: 'POST',
@@ -169,22 +172,21 @@ function showImg(imgCode){
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
         document.querySelector('.modal-body').innerHTML = '';
+
         let str = '';
 
-        str=`
-        
-        <div class="modal-body">
+        str = `
             <div class="row mt-3">
                 <div class="col">
                     <img src="/upload/${data}" style="width:100%; height:100%;">
                 </div>
             </div>
-        </div>
-        `;
+        `
+            
 
-        document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str)
+        document.querySelector('.modal-body').insertAdjacentHTML("afterbegin", str);
 
-        modal_open.show();
+        img_modal_open.show();
     })
     //fetch 통신 실패 시 실행 영역
     .catch(err=>{

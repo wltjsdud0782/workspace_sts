@@ -18,6 +18,7 @@
         <result column="CATE_CODE"   property="cateCode"/>
         <result column="ITEM_STATUS" property="itemStatus"/>
         <!--    1:N 관계의 collection 삽입     -->
+        <association property="categoryVO" resultMap="category"/>
         <collection property="imgList" resultMap="img"/>
     </resultMap>
 
@@ -54,6 +55,8 @@
         FROM shop_item SI
         INNER JOIN item_image II
         ON SI.ITEM_CODE = II.ITEM_CODE
+        INNER JOIN ITEM_CATEGORY IC
+        ON SI.CATE_CODE = IC.CATE_CODE
         WHERE SI.ITEM_CODE = #{itemCode}
     </select>
 

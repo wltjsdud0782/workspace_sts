@@ -20,4 +20,6 @@ public class ItemVO{
     private int itemStatus;
     // 아이템:아이템이미지 >> 1:n 관계
     private List<ImgVO> imgList;
+
+    private CategoryVO categoryVO;
 }
