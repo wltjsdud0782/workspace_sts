@@ -46,20 +46,26 @@
     <!--  구매 목록 조회  -->
     <select id="selectAdminBuyList" resultMap="buyMapper.shopBuy">
         SELECT
-        *
+            BUY_CODE
+            , MEMBER_ID
+            , BUY_PRICE
+            , DATE_FORMAT(BUY_DATE, '%Y-%m-%d %h:%i') BUY_DATE
         FROM SHOP_BUY
         <!--    검색    -->
         <if test='searchValue != null and !searchValue.equals("")'>
-            WHERE ${searchType} LIKE CONCAT ( '%', #{searchValue}, '%')
+            WHERE ${searchType}
+            LIKE CONCAT(
+            '%', #{searchValue}, '%'
+            )
         </if>
-        ORDER BY BUY_DATE DESC;
+        ORDER BY BUY_DATE DESC
     </select>
 
     <select id="selectAdminBuyDetailList" resultMap="buyMapper.shopBuy">
         SELECT BD.BUY_CODE
         , MEMBER_ID
         , BUY_PRICE
-        , BUY_DATE
+        , DATE_FORMAT(BUY_DATE, '%Y-%m-%d %h:%i') BUY_DATE
         , BD.ITEM_CODE
         , ITEM_NAME
         , BUY_CNT

@@ -80,7 +80,7 @@
             , TOTAL_PRICE
             , ITEM_NAME
             , ATTACHED_FILE_NAME
-            , BUY_DATE
+            , DATE_FORMAT(BUY_DATE, '%Y-%m-%d %h:%i') BUY_DATE
             , BUY_PRICE
         FROM buy_detail BD
         INNER JOIN shop_item ITEM

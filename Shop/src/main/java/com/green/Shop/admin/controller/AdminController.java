@@ -35,7 +35,7 @@ public class AdminController {
     @RequestMapping("/buyHistory")
     public String buyHistory(@RequestParam(name = "page", required = false, defaultValue = "buyHistory")String page, SearchVO searchVO, Model model){
         model.addAttribute("page", page);
-        // 구매 목록 조회
+        // 구매 목록 조회 & 검색
         List<ShopBuyVO> buyList = adminService.selectAdminBuyList(searchVO);
         model.addAttribute("buyList", buyList);
         return "content/admin/admin_history";

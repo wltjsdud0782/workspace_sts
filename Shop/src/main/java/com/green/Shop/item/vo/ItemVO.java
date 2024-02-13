@@ -17,6 +17,7 @@ public class ItemVO{
     private String itemIntro;
     private String regDate;
     private int cateCode;
+    private int itemStatus;
     // 아이템:아이템이미지 >> 1:n 관계
     private List<ImgVO> imgList;
 }

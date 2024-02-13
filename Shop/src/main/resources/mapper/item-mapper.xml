@@ -16,6 +16,7 @@
         <result column="ITEM_INTRO"  property="itemIntro"/>
         <result column="REG_DATE"    property="regDate"/>
         <result column="CATE_CODE"   property="cateCode"/>
+        <result column="ITEM_STATUS" property="itemStatus"/>
         <!--    1:N 관계의 collection 삽입     -->
         <collection property="imgList" resultMap="img"/>
     </resultMap>
