@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.lang.model.type.ReferenceType;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,10 +97,24 @@ public class AdminController {
         return "content/admin/update_item";
     }
 
+    // 상품 정보 변경
     @ResponseBody
-    @PostMapping("itemDetailInfo")
+    @PostMapping("/itemDetailInfo")
     public ItemVO itemDetailInfo(@RequestParam(name = "itemCode")int itemCode){ // 상품 상세 정보
         return itemService.selectDetail(itemCode);
+    }
+
+    @PostMapping("/updateItemDetail")
+    public String updateItemDetail(ItemVO itemVO){
+        adminService.updateItemDetail(itemVO);
+        return "redirect:/admin/updateItem";
+    }
+
+    @ResponseBody
+    @PostMapping("/selectImg")
+    public String selectImg(ImgVO imgVO){
+        System.out.println(imgVO);
+        return adminService.selectImg(imgVO);
     }
 
 

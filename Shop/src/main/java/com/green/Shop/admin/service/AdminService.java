@@ -16,4 +16,8 @@ public interface AdminService {
     List<ShopBuyVO> selectAdminBuyList(SearchVO searchVO); // 관리자메뉴 구매이력관리
 
     ShopBuyVO selectAdminBuyDetailList(ShopBuyVO shopBuyVO); // 관리자메뉴 구매상세내역조회
+
+    void updateItemDetail(ItemVO itemVO); // 상품 정보 변경
+
+    String selectImg(ImgVO imgVO); // 상품 정보 중 사진 상세 보기
 }

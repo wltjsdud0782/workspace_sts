@@ -51,12 +51,17 @@
             , BUY_PRICE
             , DATE_FORMAT(BUY_DATE, '%Y-%m-%d %h:%i') BUY_DATE
         FROM SHOP_BUY
+        WHERE 1 = 1
         <!--    검색    -->
+        <!--    부등호 < = &lt; less than           부등호 > = &gt; great than    -->
         <if test='searchValue != null and !searchValue.equals("")'>
-            WHERE ${searchType}
-            LIKE CONCAT(
-            '%', #{searchValue}, '%'
-            )
+            AND ${searchType} LIKE CONCAT( '%', #{searchValue}, '%' )
+        </if>
+        <if test='fromDate != null and !fromDate.equals("")'>
+            AND DATE_FORMAT(BUY_DATE, '%Y-%m-%d') &gt;= #{fromDate}
+        </if>
+        <if test='toDate != null and !toDate.equals("")'>
+            AND DATE_FORMAT(BUY_DATE, '%Y-%m-%d') &lt;= #{toDate}
         </if>
         ORDER BY BUY_DATE DESC
     </select>
@@ -79,6 +84,22 @@
         INNER JOIN shop_buy BUY
         ON BD.BUY_CODE = BUY.BUY_CODE
         WHERE IS_MAIN = 'Y' AND BD.BUY_CODE = #{buyCode}
+    </select>
+
+    <update id="updateItemDetail">
+        UPDATE SHOP_ITEM
+        SET
+            CATE_CODE = #{cateCode}
+            , ITEM_NAME = #{itemName}
+            , ITEM_STOCK = #{itemStock}
+            , ITEM_STATUS = #{itemStatus}
+        WHERE ITEM_CODE = #{itemCode}
+    </update>
+
+    <select id="selectImg" resultType="String">
+        SELECT ATTACHED_FILE_NAME
+        FROM  ITEM_IMAGE
+        WHERE IMG_CODE = #{imgCode}
     </select>
 	
 </mapper>

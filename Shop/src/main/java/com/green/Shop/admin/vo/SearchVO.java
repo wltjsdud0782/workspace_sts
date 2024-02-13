@@ -8,4 +8,7 @@ import lombok.Setter;
 public class SearchVO {
     private String searchType;
     private String searchValue;
+
+    private String fromDate;
+    private String toDate;
 }

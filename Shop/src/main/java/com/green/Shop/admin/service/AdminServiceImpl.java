@@ -2,6 +2,7 @@ package com.green.Shop.admin.service;
 
 import com.green.Shop.admin.vo.SearchVO;
 import com.green.Shop.buy.vo.ShopBuyVO;
+import com.green.Shop.item.vo.ImgVO;
 import com.green.Shop.item.vo.ItemVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,16 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public ShopBuyVO selectAdminBuyDetailList(ShopBuyVO shopBuyVO) { // 구매상세내역조회
         return sqlSession.selectOne("adminMapper.selectAdminBuyDetailList", shopBuyVO);
+    }
+
+    @Override
+    public void updateItemDetail(ItemVO itemVO) { // 상품 정보 변경
+        sqlSession.update("adminMapper.updateItemDetail", itemVO);
+    }
+
+    @Override
+    public String selectImg(ImgVO imgVO) {
+        return sqlSession.selectOne("adminMapper.selectImg", imgVO);
     }
 
 }

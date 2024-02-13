@@ -53,7 +53,7 @@
                                     <div class="col">
                                         <div class="input-group">
                                             <span class="input-group-text">From</span>
-                                            <input name="" min="${minDate}" type="date" class="form-control">
+                                            <input name="fromDate" min="${minDate}" type="date" class="form-control" th:value="${searchVO.fromDate}">
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                     <div class="col">
                                         <div class="input-group">
                                             <span class="input-group-text">To</span>
-                                            <input name="searchDate" value="BUY_DATE" max="${maxDate}" type="date" class="form-control">
+                                            <input name="toDate" max="${maxDate}" type="date" class="form-control" th:value="${searchVO.toDate}">
                                         </div>
                                     </div>
                                 </div>
