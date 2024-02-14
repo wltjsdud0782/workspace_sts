@@ -20,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.lang.model.type.ReferenceType;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -89,32 +87,40 @@ public class AdminController {
         return "redirect:/admin/regItemForm";
     }
 
+    //상품 변경 화면 목록 조회
     @GetMapping("/updateItem")
-    public String updateItem(Model model, @RequestParam(name = "page", required = false, defaultValue = "updateItem")String page){
+    public String updateItem(Model model, @RequestParam(name = "page", required = false, defaultValue = "updateItem")String page, CategoryVO categoryVO){
         model.addAttribute("page", page);
 
-        model.addAttribute("itemList", itemService.selectItem());
+        model.addAttribute("itemList", adminService.selectItemList());
         return "content/admin/update_item";
     }
 
-    // 상품 정보 변경
     @ResponseBody
     @PostMapping("/itemDetailInfo")
-    public ItemVO itemDetailInfo(@RequestParam(name = "itemCode")int itemCode){ // 상품 상세 정보
-                itemService.selectCate();
-        return itemService.selectDetail(itemCode);
+    public Map<String, Object> itemDetailInfo(@RequestParam(name = "itemCode")int itemCode){ // 상품 변경 화면 상세 정보
+        // 상품 정보
+        ItemVO itemDetail = adminService.selectItemDetail(itemCode);
+        // 카테고리 목록
+        List<CategoryVO> cateList = itemService.selectCate();
+
+        //두 데이터를 담을 수 있는 map 생성
+        Map<String, Object> map = new HashMap<>();
+        map.put("itemDetail", itemDetail);
+        map.put("cateList", cateList);
+
+        return map;
     }
 
     @PostMapping("/updateItemDetail")
-    public String updateItemDetail(ItemVO itemVO){
+    public String updateItemDetail(ItemVO itemVO){ // 상품 정보 변경
         adminService.updateItemDetail(itemVO);
         return "redirect:/admin/updateItem";
     }
 
     @ResponseBody
     @PostMapping("/selectImg")
-    public String selectImg(ImgVO imgVO){
-        System.out.println(imgVO);
+    public String selectImg(ImgVO imgVO){ //상품 변경 중 이미지 확인
         return adminService.selectImg(imgVO);
     }
 

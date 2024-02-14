@@ -17,8 +17,10 @@
         <result column="REG_DATE"    property="regDate"/>
         <result column="CATE_CODE"   property="cateCode"/>
         <result column="ITEM_STATUS" property="itemStatus"/>
-        <!--    1:N 관계의 collection 삽입     -->
+        <result column="STATUS_NAME" property="statusName"/>
+        <!--    1:1 관계의 association 삽입    -->
         <association property="categoryVO" resultMap="category"/>
+        <!--    1:N 관계의 collection 삽입     -->
         <collection property="imgList" resultMap="img"/>
     </resultMap>
 

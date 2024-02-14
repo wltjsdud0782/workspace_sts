@@ -41,12 +41,22 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
+    public List<ItemVO> selectItemList() { // 업데이트화면 상품 목록 조회
+        return sqlSession.selectList("adminMapper.selectItemList");
+    }
+
+    @Override
+    public ItemVO selectItemDetail(int itemCode) { // 업데이트화면 오른쪽 상품 하나 조회
+        return sqlSession.selectOne("adminMapper.selectItemDetail", itemCode);
+    }
+
+    @Override
     public void updateItemDetail(ItemVO itemVO) { // 상품 정보 변경
         sqlSession.update("adminMapper.updateItemDetail", itemVO);
     }
 
     @Override
-    public String selectImg(ImgVO imgVO) {
+    public String selectImg(ImgVO imgVO) { // 사진 상세 보기
         return sqlSession.selectOne("adminMapper.selectImg", imgVO);
     }
 

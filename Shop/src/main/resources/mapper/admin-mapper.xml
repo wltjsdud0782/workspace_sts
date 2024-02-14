@@ -86,6 +86,20 @@
         WHERE IS_MAIN = 'Y' AND BD.BUY_CODE = #{buyCode}
     </select>
 
+    <select id="selectItemList" resultMap="itemMapper.item">
+        SELECT ITEM_CODE
+        , ITEM_NAME
+        , ITEM_STOCK
+        , ITEM_STATUS
+        , CASE
+        WHEN ITEM_STATUS=1 THEN '준비중'
+        WHEN ITEM_STATUS=2 THEN '판매중'
+        ELSE '매진'
+        END STATUS_NAME
+        FROM shop_item
+        ORDER BY REG_DATE DESC
+    </select>
+
     <update id="updateItemDetail">
         UPDATE SHOP_ITEM
         SET
@@ -96,12 +110,32 @@
         WHERE ITEM_CODE = #{itemCode}
     </update>
 
+    <select id="selectItemDetail" resultMap="itemMapper.item">
+        SELECT CATE_NAME
+            , CATE.CATE_CODE
+            , ITEM_NAME
+            , ITEM_STOCK
+            , ITEM_STATUS
+            , ITEM.ITEM_CODE
+            , ORIGIN_FILE_NAME
+            , ATTACHED_FILE_NAME
+            , IS_MAIN
+            , IMG_CODE
+        FROM SHOP_ITEM ITEM
+        INNER JOIN ITEM_CATEGORY CATE
+        ON ITEM.CATE_CODE = CATE.CATE_CODE
+        INNER JOIN ITEM_IMAGE IMG
+        ON ITEM.ITEM_CODE = IMG.ITEM_CODE
+        WHERE ITEM.ITEM_CODE = #{itemCode}
+    </select>
+
     <select id="selectImg" resultType="String">
         SELECT ATTACHED_FILE_NAME
         FROM  ITEM_IMAGE
         WHERE IMG_CODE = #{imgCode}
     </select>
-	
+
+
 </mapper>
 
 

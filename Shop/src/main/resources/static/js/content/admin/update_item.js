@@ -31,7 +31,7 @@ function itemDetailInfo(itemCode){
         <div class="row">
                     <div class="col">
                         <h3>상품 기본 정보</h3>
-                        <input type="hidden" name="itemCode" value="${data.itemCode}">
+                        <input type="hidden" name="itemCode" value="${data.itemDetail.itemCode}">
                     </div>
                 </div>
                 <div class="row">
@@ -44,38 +44,38 @@ function itemDetailInfo(itemCode){
                             <tr>
                                 <td class="text-start">카테고리</td>
                                 <td>
-                                    <select name="cateCode" class="form-select">
-                                        <option value="${data.cateCode}">${data.categoryVO.cateName}</option>
-                                        <option value="${data.cateCode}">${data.categoryVO.cateName}</option>
-                                        <option value="${data.cateCode}">${data.categoryVO.cateName}</option>
-                                    </select>
+                                    <select name="cateCode" class="form-select">`
+                                data.cateList.forEach(function(cate, index) {
+                                  str += `<option ${cate.cateCode == data.itemDetail.cateCode ? 'selected' : ''} value="${cate.cateCode}">${cate.cateName}</option>`
+                                });      
+                            str +=  `</select>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-start">상품명</td>
                                 <td>
-                                    <input name="itemName" type="text" class="form-control" value="${data.itemName}">
+                                    <input name="itemName" type="text" class="form-control" value="${data.itemDetail.itemName}">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-start">상품수량</td>
                                 <td>
-                                    <input name="itemStock" type="text" class="form-control" style="width: 100%;" value="${data.itemStock}">
+                                    <input name="itemStock" type="text" class="form-control" style="width: 100%;" value="${data.itemDetail.itemStock}">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-start">상품상태</td>
                                 <td colspan="4" class="text-start">
                                     <div class="form-check form-check-inline">
-                                        <input name="itemStatus" class="form-check-input" type="radio" id="inlineRadio1" value="1" ${data.itemStatus == 1 ? 'checked' : ''}>
+                                        <input name="itemStatus" class="form-check-input" type="radio" id="inlineRadio1" value="1" ${data.itemDetail.itemStatus == 1 ? 'checked' : ''}>
                                         <label class="form-check-label" for="inlineRadio1">준비중</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input name="itemStatus" class="form-check-input" type="radio" id="inlineRadio2" value="2" ${data.itemStatus == 2 ? 'checked' : ''}>
+                                        <input name="itemStatus" class="form-check-input" type="radio" id="inlineRadio2" value="2" ${data.itemDetail.itemStatus == 2 ? 'checked' : ''}>
                                         <label class="form-check-label" for="inlineRadio2">판매중</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input name="itemStatus" class="form-check-input" type="radio" id="inlineRadio3" value="3" ${data.itemStatus == 3 ? 'checked' : ''}>
+                                        <input name="itemStatus" class="form-check-input" type="radio" id="inlineRadio3" value="3" ${data.itemDetail.itemStatus == 3 ? 'checked' : ''}>
                                         <label class="form-check-label" for="inlineRadio3">매진</label>
                                       </div>
                                 </td>
@@ -90,7 +90,7 @@ function itemDetailInfo(itemCode){
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row ms-1 mt-2">
                     <div class="col">
                         <div class="row" style="font-size: 12pt;">
                             <div class="col-4">
@@ -98,7 +98,7 @@ function itemDetailInfo(itemCode){
                             </div>
                             <div class="col-8">`;
 
-        data.imgList.forEach(function(img , index){
+            data.itemDetail.imgList.forEach(function(img , index){
             str += `<span class="pointer-span" onclick="showImg(${img.imgCode})">
             ${img.isMain == 'Y' ? img.originFileName : ''}
             </span>`
@@ -112,7 +112,7 @@ function itemDetailInfo(itemCode){
                     </div>
                     <div class="col-8">`;
 
-        data.imgList.forEach(function(img , index){
+        data.itemDetail.imgList.forEach(function(img , index){
             str += `<div class="row">`
             str += `    <div class="col">`
             str += `        <span class="pointer-span" onclick="showImg(${img.imgCode})">
@@ -132,8 +132,6 @@ str += `
                 </div>
                 </form>
         `
-        
-
         updateItemDetail.insertAdjacentHTML("afterbegin", str);
     })
     //fetch 통신 실패 시 실행 영역
@@ -145,7 +143,7 @@ str += `
 
 
 
-
+// -----------상세 이미지 확인 모달 비동기 열기------------- //
 const img_modal_open = new bootstrap.Modal('#item-img');
 function showImg(imgCode){
     fetch('/admin/selectImg', { //요청경로
@@ -176,9 +174,9 @@ function showImg(imgCode){
         let str = '';
 
         str = `
-            <div class="row mt-3">
+            <div class="row text-center">
                 <div class="col">
-                    <img src="/upload/${data}" style="width:100%; height:100%;">
+                    <img src="/upload/${data}" style="width:50%; height:100%;">
                 </div>
             </div>
         `
