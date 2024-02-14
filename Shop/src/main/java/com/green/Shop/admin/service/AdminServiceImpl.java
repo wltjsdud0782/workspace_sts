@@ -55,9 +55,4 @@ public class AdminServiceImpl implements AdminService{
         sqlSession.update("adminMapper.updateItemDetail", itemVO);
     }
 
-    @Override
-    public String selectImg(ImgVO imgVO) { // 사진 상세 보기
-        return sqlSession.selectOne("adminMapper.selectImg", imgVO);
-    }
-
 }

@@ -118,13 +118,6 @@ public class AdminController {
         return "redirect:/admin/updateItem";
     }
 
-    @ResponseBody
-    @PostMapping("/selectImg")
-    public String selectImg(ImgVO imgVO){ //상품 변경 중 이미지 확인
-        return adminService.selectImg(imgVO);
-    }
-
-
 
 
 

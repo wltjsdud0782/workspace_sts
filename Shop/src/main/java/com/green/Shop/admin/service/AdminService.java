@@ -22,6 +22,4 @@ public interface AdminService {
     ItemVO selectItemDetail(int itemCode); // 상품 정보 변경 상품 하나 조회
 
     void updateItemDetail(ItemVO itemVO); // 상품 정보 변경하기
-
-    String selectImg(ImgVO imgVO); // 상품 정보 중 사진 상세 보기
 }

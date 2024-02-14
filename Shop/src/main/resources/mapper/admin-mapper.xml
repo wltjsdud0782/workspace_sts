@@ -129,12 +129,6 @@
         WHERE ITEM.ITEM_CODE = #{itemCode}
     </select>
 
-    <select id="selectImg" resultType="String">
-        SELECT ATTACHED_FILE_NAME
-        FROM  ITEM_IMAGE
-        WHERE IMG_CODE = #{imgCode}
-    </select>
-
 
 </mapper>
 

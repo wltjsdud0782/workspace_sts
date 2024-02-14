@@ -100,7 +100,7 @@ function itemDetailInfo(itemCode){
                             <div class="col-8">`;
 
             data.itemDetail.imgList.forEach(function(img , index){
-            str += `<span class="pointer-span" onclick="showImg(${img.imgCode})">
+            str += `<span class="pointer-span" onclick="showImg('${img.attachedFileName}')">
             ${img.isMain == 'Y' ? img.originFileName : ''}
             </span>`
         });
@@ -116,7 +116,7 @@ function itemDetailInfo(itemCode){
         data.itemDetail.imgList.forEach(function(img , index){
             str += `<div class="row">`
             str += `    <div class="col">`
-            str += `        <span class="pointer-span" onclick="showImg(${img.imgCode})">
+            str += `        <span class="pointer-span" onclick="showImg('${img.attachedFileName}')">
                                 ${img.isMain == 'N' ? img.originFileName : ''}
                             </span>`
             str += `    </div>`
@@ -144,32 +144,9 @@ str += `
 
 
 
-// -----------상세 이미지 확인 모달 비동기 열기------------- //
+// -----------상세 이미지 확인 모달 열기------------- //
 const img_modal_open = new bootstrap.Modal('#item-img');
-function showImg(imgCode){
-    fetch('/admin/selectImg', { //요청경로
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        },
-        //컨트롤러로 전달할 데이터
-        body: new URLSearchParams({
-           // 데이터명 : 데이터값
-           imgCode : imgCode
-        })
-    })
-    .then((response) => {
-        if(!response.ok){
-            alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
-            return ;
-        }
-    
-        return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
-        //return response.json(); //나머지 경우에 사용
-    })
-    //fetch 통신 후 실행 영역
-    .then((data) => {//data -> controller에서 리턴되는 데이터!
+function showImg(fileName){
         document.querySelector('.modal-body').innerHTML = '';
 
         let str = '';
@@ -177,7 +154,7 @@ function showImg(imgCode){
         str = `
             <div class="row text-center">
                 <div class="col">
-                    <img src="/upload/${data}" style="width:50%; height:100%;">
+                    <img src="/upload/${fileName}" style="width:50%; height:100%;">
                 </div>
             </div>
         `
@@ -186,10 +163,4 @@ function showImg(imgCode){
         document.querySelector('.modal-body').insertAdjacentHTML("afterbegin", str);
 
         img_modal_open.show();
-    })
-    //fetch 통신 실패 시 실행 영역
-    .catch(err=>{
-        alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-        console.log(err);
-    });
-}
+    }
