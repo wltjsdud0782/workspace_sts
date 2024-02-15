@@ -89,8 +89,10 @@ public class AdminController {
 
     //상품 변경 화면 목록 조회
     @GetMapping("/updateItem")
-    public String updateItem(Model model, @RequestParam(name = "page", required = false, defaultValue = "updateItem")String page, CategoryVO categoryVO){
+    public String updateItem(Model model, @RequestParam(name = "page", required = false, defaultValue = "updateItem")String page
+                            ,@RequestParam(name = "itemCode", required = false, defaultValue = "0")int itemCode){
         model.addAttribute("page", page);
+        model.addAttribute("updateItemCode", itemCode);
 
         model.addAttribute("itemList", adminService.selectItemList());
         return "content/admin/update_item";
@@ -115,7 +117,7 @@ public class AdminController {
     @PostMapping("/updateItemDetail")
     public String updateItemDetail(ItemVO itemVO){ // 상품 정보 변경
         adminService.updateItemDetail(itemVO);
-        return "redirect:/admin/updateItem";
+        return "redirect:/admin/updateItem?itemCode="+itemVO.getItemCode();
     }
 
 
