@@ -1,12 +1,10 @@
 package com.green.Shop.study.fetch.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/fetch")
@@ -58,6 +56,17 @@ public class FetchController {
 
         HashMap<String, String> a = (HashMap<String, String>)map.get("memberInfo");
         System.out.println(a.get("memberId"));
+
+        HashMap<String, Object> b = (HashMap<String, Object>)map.get("itemInfo");
+        ArrayList<HashMap<String, Object>> c = (ArrayList<HashMap<String,Object>>)b.get("imgList");
+        System.out.println(c.get(1).get("imgCode"));
+
+        System.out.println();
+        // map 데이터를 vo 객체에 매핑하기
+        ObjectMapper mapper = new ObjectMapper();
+        MapDataVO data = mapper.convertValue(map, MapDataVO.class);
+        System.out.println(data);
+
     }
 
 
