@@ -18,3 +18,8 @@
     text-align: end;
     vertical-align: bottom;
 }
+
+.statusLine{
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}

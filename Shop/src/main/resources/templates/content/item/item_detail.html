@@ -23,13 +23,29 @@
                     <div>[[${#numbers.formatCurrency(itemInfo.itemPrice)}]]</div>
                     <input type="hidden" name="buyPrice" th:value="${itemInfo.itemPrice}">
                     <div>수 량 
+                        <th:block th:if="${itemInfo.itemStatus == 3}">
+                            <input type="text" class="cntNum" value="매진" disabled>
+                        </th:block>
+                        <th:block th:if="${itemInfo.itemStatus != 3}">
                             <input type="number" name="buyCnt" class="cntNum" min="1" th:max="${itemInfo.itemStock}" th:oninput="setPrice(this, [[${itemInfo.itemPrice}]])" value="1">
+                        </th:block>
                     </div>
-                    <div>총 구매가격 >> <span class="result">[[${#numbers.formatCurrency(itemInfo.itemPrice)}]]</span>
+                    <div>총 구매가격 >> 
+                        <th:block th:if="${itemInfo.itemStatus == 3}">
+                            <span class="result">0</span>
+                        </th:block>
+                        <th:block th:if="${itemInfo.itemStatus != 3}">
+                            <span class="result">[[${#numbers.formatCurrency(itemInfo.itemPrice)}]]</span>
+                        </th:block>
                     </div>
                     <div style="margin-top: 10px;">
-                        <input type="button" class="detailBtn" th:onclick="insertCart([[${session.loginInfo}]], [[${itemInfo.itemCode}]])" value="장바구니"> &nbsp; 
-                        <input type="button" class="detailBtn" onclick="goBuyOne()" value="바로 구매">
+                        <th:block th:if="${itemInfo.itemStatus == 3}">
+                            구매가 불가능한 상품입니다.
+                        </th:block>
+                        <th:block th:if="${itemInfo.itemStatus != 3}">
+                            <input type="button" class="detailBtn" th:onclick="insertCart([[${session.loginInfo}]], [[${itemInfo.itemCode}]])" value="장바구니"> &nbsp; 
+                            <input type="button" class="detailBtn" onclick="goBuyOne()" value="바로 구매">
+                        </th:block>
                     </div>
                 </div>
             </div>

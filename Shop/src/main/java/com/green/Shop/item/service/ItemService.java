@@ -10,8 +10,9 @@ public interface ItemService {
 
     List<CategoryVO> selectCate();
 
-    List<ItemVO> selectItem();
+    List<ItemVO> selectItem(int cateCode);
 
     ItemVO selectDetail(int itemCode);
+
 
 }

@@ -20,14 +20,17 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public List<ItemVO> selectItem() {
-        return sqlSession.selectList("itemMapper.selectItem");
+    public List<ItemVO> selectItem(int itemCode) {
+        return sqlSession.selectList("itemMapper.selectItem", itemCode);
     }
 
     @Override
-    public ItemVO selectDetail(int itemCode) {
-        return sqlSession.selectOne("itemMapper.selectDetail", itemCode);
+    public ItemVO selectDetail(int cateCode) {
+        return sqlSession.selectOne("itemMapper.selectDetail", cateCode);
     }
 
 
 }
+
+
+

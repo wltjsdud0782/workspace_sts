@@ -41,13 +41,19 @@
     </select>
 
     <select id="selectItem" resultMap="item">
-        SELECT
-        *
+        SELECT SI.ITEM_CODE
+            , ITEM_NAME
+            , ITEM_PRICE
+            , ATTACHED_FILE_NAME
+            , ITEM_STATUS
         FROM
         SHOP_ITEM SI
         INNER JOIN ITEM_IMAGE II
         ON SI.ITEM_CODE = II.ITEM_CODE
         WHERE IS_MAIN = 'Y'
+        <if test="cateCode != 0">
+        AND CATE_CODE = #{cateCode}
+        </if>
         ORDER BY REG_DATE DESC
     </select>
 

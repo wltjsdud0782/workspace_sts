@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,9 +23,11 @@ public class ItemController {
     private ItemServiceImpl itemService;
 
     @GetMapping("/list") // 상품 목록 페이지
-    public String list(Model model){
+    public String list(Model model, @RequestParam(name = "page", required = false, defaultValue = "all")String page,
+                       @RequestParam(name = "cateCode", required = false, defaultValue = "0") int cateCode){
 //        List<ItemVO> itemList = itemService.selectItem();
-        model.addAttribute("itemList", itemService.selectItem());
+        model.addAttribute("itemList", itemService.selectItem(cateCode));
+        model.addAttribute("page", page);
 
         return "content/item/item_list";
     }
@@ -34,4 +37,6 @@ public class ItemController {
         model.addAttribute("itemInfo", itemService.selectDetail(itemCode));
         return "content/item/item_detail.html";
     }
+
+
 }
