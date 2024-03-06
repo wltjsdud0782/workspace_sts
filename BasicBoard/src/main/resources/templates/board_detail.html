@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+글번호 : [[${board.boardNum}]]<br>
+제목 : [[${board.boardTitle}]]<br>
+내용 : [[${board.boardContent}]]<br>
+작성자 : [[${board.writer}]]<br>
+작성일 : [[${board.createDate}]]<br>
+
+<input type="button" value="삭제" th:onclick="|location.href='@{/deleteBoard(boardNum=${board.boardNum})}'|"> <br>
+<input type="button" value="수정" th:onclick="|location.href='@{/updateBoardForm(boardNum=${board.boardNum})}'|">
+</body>
+</html>
+
+
+
+
+
+
