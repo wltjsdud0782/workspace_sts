@@ -23,14 +23,14 @@
         )
     </insert>
 
-    <!-- 로그인  -->
+    <!-- 로그인에 필요한 정보를 시큐리티에게 전달하기 위한 조회 -->
     <select id="login" resultMap="member">
         SELECT
             MEMBER_ID
-            , MEMBER_NAME
+            , MEMBER_PW
             , MEMBER_ROLL
         FROM SECURITY_MEMBER
-        WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw}
+        WHERE MEMBER_ID = #{memberId}
     </select>
 
 
