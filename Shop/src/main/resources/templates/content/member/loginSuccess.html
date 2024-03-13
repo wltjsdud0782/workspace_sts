@@ -18,7 +18,7 @@
         <!-- 로그인 성공 -->
         <th:block th:unless="${session.loginInfo == null}">
             <script>
-                alert('[[${session.loginInfo.getMemberName}]]님 반갑습니다.');
+                alert('[[${session.loginInfo.getMemberId}]]님 반갑습니다.');
                 location.href ='/item/list';
             </script>
         </th:block>

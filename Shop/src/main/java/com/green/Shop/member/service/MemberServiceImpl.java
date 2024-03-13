@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberVO selectMember(MemberVO memberVO) {
-        return sqlSession.selectOne("memberMapper.selectMember", memberVO);
+    public MemberVO selectMember(String memberId) {
+        return sqlSession.selectOne("memberMapper.selectMember", memberId);
     }
 }

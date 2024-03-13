@@ -5,7 +5,15 @@
 <mapper namespace="memberMapper">
     <resultMap id="member" type="com.green.Shop.member.vo.MemberVO">
         <id     column="MEMBER_ID"      property="memberId"/>
+        <result column="MEMBER_PW"      property="memberPw"/>
         <result column="MEMBER_NAME"    property="memberName"/>
+        <result column="GENDER"         property="gender"/>
+        <result column="MEMBER_EMAIL"    property="memberEmail"/>
+        <result column="MEMBER_TEL"    property="memberTel"/>
+        <result column="MEMBER_ADDR"    property="memberAddr"/>
+        <result column="ADDR_DETAIL"    property="addrDetail"/>
+        <result column="POST_CODE"    property="postCode"/>
+        <result column="JOIN_DATE"    property="joinDate"/>
         <result column="MEMBER_ROLL"    property="memberRoll"/>
     </resultMap>
 
@@ -36,11 +44,11 @@
 </insert>
 <select id="selectMember" resultMap="member">
     SELECT
-    MEMBER_ID
-    , MEMBER_NAME
-    , MEMBER_ROLL
+        MEMBER_ID
+        , MEMBER_PW
+        , MEMBER_ROLL
     FROM SHOP_MEMBER
-    WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw}
+    WHERE MEMBER_ID = #{memberId}
 </select>
 	
 </mapper>
