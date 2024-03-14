@@ -1,5 +1,7 @@
 package com.green.Shop.security;
 
+import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +15,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
+    @Autowired
+    private LoginFailHandler loginFailHandler;
+
     // 인증과 인가에 대한 설정 내용이 있는 메소드 구현
     // 반드시 리턴타입은 securityFilterChain
     // 메소드의 매개변수로 httpsecurity 객체 필요
@@ -39,11 +46,15 @@ public class SecurityConfig {
                         formLogin -> {
                             formLogin.loginPage("/member/login")
                                     .loginProcessingUrl("/member/loginSuccess")
-                                    .defaultSuccessUrl("/", true)
+                                    //.defaultSuccessUrl("/", true)
                                     // true - ""안 페이지이동 / false - 이전페이지이동
-                                    .failureUrl("/member/login")
+                                    //.failureUrl("/member/login")
                                     .usernameParameter("memberId")
-                                    .passwordParameter("memberPw");
+                                    .passwordParameter("memberPw")
+                                    // ▼ 로그인 성공 시 실행시킬 클래스의 객체
+                                    .successHandler(loginSuccessHandler)
+                                    // ▼ 로그인 실패 시 실행시킬 클래스의 객체
+                                    .failureHandler(loginFailHandler);
                         }
                 )
                 .logout(
@@ -65,6 +76,7 @@ public class SecurityConfig {
                 , new AntPathRequestMatcher("/css/**")
                 , new AntPathRequestMatcher("/js/**")
                 , new AntPathRequestMatcher("/images/**")
+                , new AntPathRequestMatcher("/favicon.ico")
 //              다 지우고 new AntPathRequestMatcher("/**") 가능
         );
     }

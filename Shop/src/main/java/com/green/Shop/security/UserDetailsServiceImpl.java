@@ -21,7 +21,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 로그인을 시도하는 유저의 정보 조회
         MemberVO loginInfo = memberService.selectMember(username);
-        System.out.println(loginInfo);
         
         // 로그인을 시도하는 유저의 정보를 security 에게 넘기기
         // user 는 userdetails 라는 인터페이스를 구현하고 있다.
