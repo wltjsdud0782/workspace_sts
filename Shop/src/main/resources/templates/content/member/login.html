@@ -16,6 +16,9 @@
             <label for="memberIdIn" class="form-label">ID</label>
             <input type="text" name="memberId" class="form-control" id="memberIdIn" placeholder="아이디">
           </div>
+          <div th:if="${errorMsg != 'success'}" style="color: red; font-size: 0.9rem;">
+            [[${errorMsg}]]
+          </div>
           <div class="mb-3">
             <label for="memberPw" class="form-label">PW</label>
             <input type="password" name="memberPw" class="form-control" id="memberPw" placeholder="비밀번호">
